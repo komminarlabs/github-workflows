@@ -61,7 +61,7 @@ jobs:
           REPOSITORIES: ${{ env.REPOSITORIES }}
           WORKFLOW_FILES: ${{ env.WORKFLOW_FILES }}
           COMMIT_MESSAGE: "[SYNC] github-workflows"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
 
       - name: Synchronize Terraform Provider files
         uses: varunsridharan/action-github-workflow-sync@3.4
@@ -69,7 +69,7 @@ jobs:
           REPOSITORIES: ${{ env.TFP_REPOSITORIES }}
           WORKFLOW_FILES: ${{ env.TFP_WORKFLOW_FILES }}
           COMMIT_MESSAGE: "[SYNC] github-workflows"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
 
       - name: Synchronize Pulumi Provider files
         uses: varunsridharan/action-github-workflow-sync@3.4
@@ -77,4 +77,4 @@ jobs:
           REPOSITORIES: ${{ env.PP_REPOSITORIES }}
           WORKFLOW_FILES: ${{ env.PP_WORKFLOW_FILES }}
           COMMIT_MESSAGE: "[SYNC] github-workflows"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
