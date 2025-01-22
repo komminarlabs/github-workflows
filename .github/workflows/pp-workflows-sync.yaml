@@ -16,7 +16,6 @@ env:
     workflows-sync/auto-assign.yml=.github/workflows/auto-assign.yml
     workflows-sync/pulumi-provider/check-upstream-upgrade.yml=.github/workflows/check-upstream-upgrade.yml
     workflows-sync/pulumi-provider/lint.yml=.github/workflows/lint.yml
-    workflows-sync/pulumi-provider/pull-request.yml=.github/workflows/pull-request.yml
     workflows-sync/pulumi-provider/release.yml=.github/workflows/release.yml
 
 jobs:
