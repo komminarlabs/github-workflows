@@ -1,4 +1,4 @@
-name: Workflow Sync - Generic
+name: Workflow Sync - Pulumi Provider
 
 on:
   workflow_dispatch:
@@ -8,16 +8,16 @@ on:
 
 env:
   REPOSITORIES: |
-    komminarlabs/cratedb
-    komminarlabs/influxdb3
-    komminarlabs/influxdb3-action
-    komminarlabs/nomad-pack-registry
-    komminarlabs/terraform-aws-glue-job
-    komminarlabs/terraform-aws-managed-grafana
-    komminarlabs/terraform-aws-sagemaker-studio
+    komminarlabs/pulumi-cratedb
+    komminarlabs/pulumi-influxdb
+    komminarlabs/pulumi-influxdb3
 
   WORKFLOW_FILES: |
     workflows-sync/auto-assign.yml=.github/workflows/auto-assign.yml
+    workflows-sync/pulumi-provider/check-upstream-upgrade.yml=.github/workflows/check-upstream-upgrade.yml
+    workflows-sync/pulumi-provider/lint.yml=.github/workflows/lint.yml
+    workflows-sync/pulumi-provider/pull-request.yml=.github/workflows/pull-request.yml
+    workflows-sync/pulumi-provider/release.yml=.github/workflows/release.yml
 
 jobs:
   sync:

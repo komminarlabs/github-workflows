@@ -1,4 +1,4 @@
-name: Workflow Sync - Generic
+name: Workflow Sync - Terraform Provider
 
 on:
   workflow_dispatch:
@@ -8,16 +8,16 @@ on:
 
 env:
   REPOSITORIES: |
-    komminarlabs/cratedb
-    komminarlabs/influxdb3
-    komminarlabs/influxdb3-action
-    komminarlabs/nomad-pack-registry
-    komminarlabs/terraform-aws-glue-job
-    komminarlabs/terraform-aws-managed-grafana
-    komminarlabs/terraform-aws-sagemaker-studio
+    komminarlabs/terraform-provider-cratedb
+    komminarlabs/terraform-provider-influxdb
+    komminarlabs/terraform-provider-influxdb3
+    komminarlabs/terraform-provider-mageai
 
   WORKFLOW_FILES: |
     workflows-sync/auto-assign.yml=.github/workflows/auto-assign.yml
+    workflows-sync/terraform-provider/ci.yml=.github/workflows/ci.yml
+    workflows-sync/terraform-provider/pull-request.yml=.github/workflows/pull-request.yml
+    workflows-sync/terraform-provider/release.yml=.github/workflows/release.yml
 
 jobs:
   sync:
