@@ -1,0 +1,80 @@
+name: Workflow Sync
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  REPOSITORIES: |
+    komminarlabs/cratedb
+    komminarlabs/influxdb3
+    komminarlabs/influxdb3-action
+    komminarlabs/nomad-pack-registry
+    komminarlabs/pulumi-cratedb
+    komminarlabs/pulumi-influxdb
+    komminarlabs/pulumi-influxdb3
+    komminarlabs/terraform-aws-glue-job
+    komminarlabs/terraform-aws-managed-grafana
+    komminarlabs/terraform-aws-sagemaker-studio
+    komminarlabs/terraform-provider-cratedb
+    komminarlabs/terraform-provider-influxdb
+    komminarlabs/terraform-provider-influxdb3
+    komminarlabs/terraform-provider-mageai
+
+  WORKFLOW_FILES: |
+    workflows-sync/auto-assign.yml=.github/workflows/auto-assign.yml
+
+  TFP_REPOSITORIES: |
+    komminarlabs/terraform-provider-cratedb
+    komminarlabs/terraform-provider-influxdb
+    komminarlabs/terraform-provider-influxdb3
+    komminarlabs/terraform-provider-mageai
+
+  TFP_WORKFLOW_FILES: |
+    workflows-sync/terraform-provider/ci.yml=.github/workflows/ci.yml
+    workflows-sync/terraform-provider/pull-request.yml=.github/workflows/pull-request.yml
+    workflows-sync/terraform-provider/release.yml=.github/workflows/release.yml
+
+  PP_REPOSITORIES: |
+    komminarlabs/pulumi-cratedb
+    komminarlabs/pulumi-influxdb
+    komminarlabs/pulumi-influxdb3
+
+  PP_WORKFLOW_FILES: |
+    workflows-sync/pulumi-provider/check-upstream-upgrade.yml=.github/workflows/check-upstream-upgrade.yml
+    workflows-sync/pulumi-provider/lint.yml=.github/workflows/lint.yml
+    workflows-sync/pulumi-provider/pull-request.yml=.github/workflows/pull-request.yml
+    workflows-sync/pulumi-provider/release.yml=.github/workflows/release.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Synchronize Generic files
+        uses: varunsridharan/action-github-workflow-sync@3.4
+        with:
+          REPOSITORIES: ${{ env.REPOSITORIES }}
+          WORKFLOW_FILES: ${{ env.WORKFLOW_FILES }}
+          COMMIT_MESSAGE: "[SYNC] github-workflows"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Synchronize Terraform Provider files
+        uses: varunsridharan/action-github-workflow-sync@3.4
+        with:
+          REPOSITORIES: ${{ env.TFP_REPOSITORIES }}
+          WORKFLOW_FILES: ${{ env.TFP_WORKFLOW_FILES }}
+          COMMIT_MESSAGE: "[SYNC] github-workflows"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Synchronize Pulumi Provider files
+        uses: varunsridharan/action-github-workflow-sync@3.4
+        with:
+          REPOSITORIES: ${{ env.PP_REPOSITORIES }}
+          WORKFLOW_FILES: ${{ env.PP_WORKFLOW_FILES }}
+          COMMIT_MESSAGE: "[SYNC] github-workflows"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
